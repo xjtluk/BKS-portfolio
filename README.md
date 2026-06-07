@@ -1,14 +1,3 @@
----
-AIGC:
-    Label: "1"
-    ContentProducer: 001191440300708461136T1XGW3
-    ProduceID: 791cb3c8963b65894fbf91a10e48b476_89e259aa5cbb11f1b2415254002afed2
-    ReservedCode1: OQkbDnbcmJzXvYqCnyMDnFpIOGZUfwY6oLgW+du18YiIBu8aKk536KQU4HxWnITm/WXpcgeTosrkGRo2ObPRhYq6p9ELsx1aJYk1HVqNrFgp6UFxxTgetobmKd3iwEt0phql9291+9ZVuZNB1rZW6Rufrh3o/ZWYFFEVVYqUXQNdUzrHPN8JPUKt/E8=
-    ContentPropagator: 001191440300708461136T1XGW3
-    PropagateID: 791cb3c8963b65894fbf91a10e48b476_89e259aa5cbb11f1b2415254002afed2
-    ReservedCode2: OQkbDnbcmJzXvYqCnyMDnFpIOGZUfwY6oLgW+du18YiIBu8aKk536KQU4HxWnITm/WXpcgeTosrkGRo2ObPRhYq6p9ELsx1aJYk1HVqNrFgp6UFxxTgetobmKd3iwEt0phql9291+9ZVuZNB1rZW6Rufrh3o/ZWYFFEVVYqUXQNdUzrHPN8JPUKt/E8=
----
-
 # BKS Studio
 
 > 一个 Builder + 一群 AI Agent。这不是工具调用，是持牌上岗的团队协作。
@@ -85,12 +74,49 @@ KK 决定将协作 Agent 体系正规化。从"一个助手"升级为"一个团�
 
 ![BKS Studio V1.0 截图](screenshot-v1.0.png)
 
+### 团队工作室 `V1.1 已发布` (2026-06-04)
+
+CX（代码工程师）正式加入团队，多模型路由架构上线，像素办公场景升级。
+
+| 维度 | 详情 |
+|------|------|
+| 新成员 | CX（代码工程师），基于 DeepSeek V4 Pro，专注代码实现与执行 |
+| 多模型路由 | SiliconFlow → 火山方舟 → 智谱 → MiMo 四级降级链，Provider 冷却机制 |
+| 看板中文化 | 状态看板全面中文化，活动概况中文摘要，InfoPanel 悬浮信息面板 |
+| 像素场景升级 | 6 工位 3x2 布局，工作区/休息区/调试区分区，角色精灵动画状态机 |
+| 稳定性 | Agent 心跳追踪 + 掉线自动重连 + Watchdog 进程守护 + 自适应超时 |
+| 知识沉淀 | 知识库从 4 篇扩充至 12 篇，覆盖协作流程/技术方案/工具配置/故障排查 |
+| 协作规范 | CC-CX 分工铁律（设计/实现分离）、CC-CX 互助铁律、Karpathy 编码四原则 |
+
+![BKS Studio V1.1 截图](v1.1-dashboard.png)
+
+### 团队工作室 `V1.2 已发布` (2026-06-07)
+
+对标 Routa（1.6K stars）和 ClawTeam（5.3K stars）两大开源项目，完成四项核心能力升级。
+
+| 维度 | 详情 |
+|------|------|
+| 任务依赖链 | DAG 驱动的自动编排：`blocked_by`/`blocks` 依赖声明，完成自动解锁下游任务 |
+| 消息 Schema | 统一格式约束：`message-schema.mjs` 定义必填字段、类型、枚举，发送前+接收前校验 |
+| CC 行为硬约束 | 三板斧验证器：`pre-dispatch-check.mjs` 程序化强制任务拆分，违规自动拦截+记录 |
+| Trace 持久化 | 结构化 JSONL：每次 Agent 执行全过程写入 `traces/` 目录，支持 API 查询 |
+| 私聊通道 | 微信式隔离：群聊/私聊消息完全分离，channel 路由+自动回复到正确通道 |
+| Sidecar 进程管理 | 单实例保障：进程去重+消息队列串行处理，杜绝重复回复 |
+
+**技术亮点**：
+- **DAG 任务引擎**：对标 Routa 的 `task-block-parser` 和 ClawTeam 的 `--blocked-by`，支持复杂任务自动编排
+- **Schema 约束**：对标 Routa 的 OpenAPI Contract 和 ClawTeam 的 Pydantic，运行时校验杜绝格式错误
+- **自动化门禁**：对标 Routa 的 `transition-gates` 和 ClawTeam 的 `SprintContract`，三板斧验证器程序化强制规则
+- **Trace 系统**：对标 Routa 的 JSONL traces 和 ClawTeam 的 `events/` 目录，执行全过程可追溯
+- **私聊隔离**：channel 即目标语义，`dm_cc`/`dm_cx` 独立通道，回复自动跟随原消息通道
+
 ---
 
 ## 成长日志
 
 | 日期 | 事件 |
 |------|------|
+| 2026-06-07 | V1.2 发布：任务依赖链DAG、消息Schema约束、三板斧验证器、Trace持久化、私聊通道隔离、对标Routa/ClawTeam |
 | 2026-06-04 | V1.1 发布：CX（代码工程师）加入团队，多模型路由架构，看板中文状态，agent掉线自动重连，知识库扩充至12篇 |
 | 2026-06-03 | 多模型降级链部署（DeepSeek/GLM/MiMo），Claude Code Router 上线，CC-CX分工优化 |
 | 2026-06-02 | 代理穿透方案定型，定时任务融合优化，身份识别协议确立 |
@@ -103,11 +129,12 @@ KK 决定将协作 Agent 体系正规化。从"一个助手"升级为"一个团�
 |------|------|
 | 团队成员 | 4 人（KK / 小马 / CC / CX） |
 | 团队规范版本 | v1.12+ |
-| 知识库条目 | 4 分类，12 篇 |
+| 知识库条目 | 4 分类，15+ 篇 |
 | GitHub 仓库 | 3 个（BKS-team / team-workspace / BKS-portfolio） |
 | 协作消息协议 | 8 种类型（任务/完成/TOK/问题/审阅/收到/通过/打回） |
 | 复盘机制 | 日报/周报/SOP 三层体系，四阶段标准流程 |
 | AI 模型 | 4 路（MiMo / DeepSeek / GLM / TaoToken） |
+| 对标项目 | Routa（1.6K stars）/ ClawTeam（5.3K stars） |
 
 ---
 
